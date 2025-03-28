@@ -1,0 +1,12 @@
+nav a{
+    padding:5px;
+    color:green;
+}
+nav a.active{
+    padding: 5px;
+    border: 1px solid green;
+    background-color: green;
+    color:white;
+    font-weight:bold;
+    border-radius: 5px;
+}
