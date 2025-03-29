@@ -1,4 +1,6 @@
 import { useLoaderData, useParams } from "react-router-dom";
+import { saveBooks, saveWishlistedBooks } from "../../utilities/localStorage";
+import { toast, ToastContainer } from "react-toastify";
 
 const BookDetails = () => {
 
@@ -7,6 +9,20 @@ const BookDetails = () => {
     const idInt = parseInt(id);
     const book = books.find(book => book.id === idInt);
     console.log(book);
+
+    const handleReadBooks = () => {
+        saveBooks(idInt);
+        if (book) {
+            toast("Added to Read Books successfully !")
+        } else {
+            toast.error("Book already added. Try another one.")
+        }
+    }
+
+    const handleWishlistedBooks = () => {
+        saveWishlistedBooks(idInt);
+        toast("Added to Wishlist successfully")
+    }
 
     return (
         <div>
@@ -53,9 +69,10 @@ const BookDetails = () => {
                         <span className="text-gray-500">{book.rating}</span>
                     </p>
                     <div className="card-actions">
-                        <button className="btn">Read</button>
-                        <button className="btn btn-accent">Wishlist</button>
+                        <button onClick={handleReadBooks} className="btn">Read</button>
+                        <button onClick={handleWishlistedBooks} className="btn btn-accent">Wishlist</button>
                     </div>
+                    <ToastContainer />
                 </div>
             </div>
         </div>
